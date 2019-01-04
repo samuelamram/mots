@@ -41,7 +41,7 @@ WORD_PATTERNS = {
 
 def mot(phonemes):
     """
-    Recursive algorithm to generate a pseudo-french word
+    Recursive algorithm to generate a pseudo-french word using word patterns
     """
     if phonemes.islower() or phonemes == '':
         return phonemes
@@ -49,11 +49,12 @@ def mot(phonemes):
         return mot(choice(WORD_PATTERNS.get(phonemes[0], (phonemes[0],)))) + mot(phonemes[1:])
 
 def liste_de_mots(nombre):
-    l = []
+    seed()
+    words = []
     for i in range(nombre):
         word_pattern = choice(WORD_PATTERNS['W'])
-        l.append('{0}: {1}'.format(word_pattern, mot(word_pattern).capitalize()))
-    return l
+        words.append(mot(word_pattern).capitalize())
+    return words
 
 def main(num):
   
@@ -70,7 +71,6 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    seed()
-    l = main(args.num)
-    for i in l:
-        print(f'{i}')
+    result_list = main(args.num)
+    for words in result_list:
+        print(f'{words}')
