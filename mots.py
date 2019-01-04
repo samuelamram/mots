@@ -58,8 +58,12 @@ def liste_de_mots(nombre):
 
 def main(num):
   
-  pool = mp.Pool(mp.cpu_count())
-  result = pool.map(liste_de_mots, [num//mp.cpu_count() for i in range(mp.cpu_count())])
+  # Multiprocessing if num is large enough
+  if num > 100 * mp.cpu_count():
+      pool = mp.Pool(mp.cpu_count())
+      result = pool.map(liste_de_mots, [num//mp.cpu_count() for i in range(mp.cpu_count())])
+  else:
+      result = [liste_de_mots(num)]
 
   return result
 
@@ -73,4 +77,5 @@ if __name__ == '__main__':
 
     result_list = main(args.num)
     for words in result_list:
-        print(f'{words}')
+        for word in words:
+            print(f'{word}')
