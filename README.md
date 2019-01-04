@@ -1,5 +1,6 @@
 # mots
-A simple pseudo-french random word generator
+A simple pseudo-french random word generator.<br>
+Based on http://generators.christopherpound.com/#werd
 
 ## Usage
 
